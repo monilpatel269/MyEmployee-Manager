@@ -1,0 +1,78 @@
+{%extends 'mem/base.html'%}
+{%block title%}
+MyEmployee | AddEmp
+{%endblock%}
+
+{% block body%}
+
+<div class="container my-3">
+    <form action="/addEmp/" method="post">
+      {%csrf_token%}
+      <h3>Add an Employee</h3>
+
+      <div class="form-group">
+        <label for="fname">First Name</label>
+        <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Enter First Name..."/>
+      </div>
+
+      <div class="form-group">
+        <label for="lname">Last Name</label>
+        <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Enter Last Name..."/>
+      </div>
+     
+      <div class="form-group">
+        <label for="dept">Select Department:</label>
+        <select class="form-control" id="dept" name="dept">
+            {%for dep in deps%}
+            <option value="{{dep.id}}">{{dep.name}}</option>
+            {%endfor%}
+          </select>
+      </div>
+      
+      <div class="form-group">
+        <label for="salary">Salary</label>
+        <input type="text" class="form-control" id="salary" name="salary" placeholder="Enter Employee Salary..."/>
+      </div>
+
+      <div class="form-group">
+        <label for="bonus">Bonus</label>
+        <input type="text" class="form-control" id="bonus" name="bonus" placeholder="Enter Employee Bonus..."/>
+      </div>
+
+      <div class="form-group">
+        <label for="role">Role</label>
+        <select class="form-control" id="role" name="role">
+            {%for rol in rols%}
+            <option value="{{rol.id}}">{{rol.name}}</option>
+            {%endfor%}
+          </select>
+      </div>
+
+      <div class="form-group">
+        <label for="phone">Contact Number</label>
+        <input type="tel" class="form-control" id="phone" name="phone" placeholder="Enter Contact Number..."/>
+      </div>
+
+      <div class="form-group">
+        <label for="hiredate">Hire Date</label>
+        <div class="input-group date" data-provide="datepicker">
+          <input type="text" class="form-control" id="hiredate" name="hiredate" placeholder="yyyy-mm-dd">
+      </div>
+      </div>
+  
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+
+{% endblock %}
+{%block js%}
+<script type="text/javascript">
+  $(function(){
+    $('.datepicker').datepicker({
+      format: 'yyyy/mm/dd',
+      startDate: '-3d'
+  });
+  });
+
+</script>
+{%endblock%}
